@@ -1,0 +1,11 @@
+{% extends 'matematicaapp/base.html' %}
+
+{% block content %}
+    {% for estudante in estudantes %}
+        <div>
+            <h2><a href="{% url 'estudante_detail' pk=estudante.pk %}">{{ estudante.nome_completo }}</a></h2>
+            <p> {{ estudante.cpf_responsavel }}</p>
+            <p>{{ estudante.telefone }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

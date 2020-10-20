@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 # from django.conf import settings
 # Create your models here.
 
@@ -29,3 +30,13 @@ class Estudante(models.Model):
     cidade = models.CharField(max_length=100)
     estado = models.CharField(max_length=100)
     foto = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    updated_date = models.DateTimeField(default=timezone.now)
+
+    def create(self):
+        self.created_date = timezone.now()
+        self.updated_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.nome_completo

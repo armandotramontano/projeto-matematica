@@ -1,0 +1,12 @@
+{% extends 'matematicaapp/base.html' %}
+
+{% block content %}
+    <div class="post">
+            {{ estudante.nome_completo }}
+        <h2>{{ estudante.cpf_responsavel }}</h2>
+        <p>{{ estudante.data_de_nascimento }}</p>
+    {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'estudante_edit' pk=estudante.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
+    </div>
+{% endblock %}
