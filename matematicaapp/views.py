@@ -1,15 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Estudante
+from .models import Estudante, User, Professor, Questao, Alternativa
 from django.utils import timezone
 from .forms import EstudanteForm
 
 
 # Create your views here.
 
-
 def home(request):
     estudantes = Estudante.objects.order_by('nome_completo')
-    return render(request, 'matematicaapp/home.html', {'estudantes': estudantes})
+    professores = Professor.objects.order_by('nome_completo')
+    tabela = Estudante.objects.all()
+    tabela2 = User.objects.all()
+    return render(request, 'matematicaapp/home.html', {'estudantes': estudantes, 'tabela': tabela, 'tabela2': tabela2, 'professores': professores})
+    
+def atividadesgratis(request):
+    questoes = Questao.objects.all()
+    return render(request, 'matematicaapp/atividadesgratis.html', {'questoes': questoes})
+
+def atividades5ano(request, pk, id_resposta):
+    questao = get_object_or_404(Questao, pk=pk)
+    alternativas = Alternativa.objects.filter(questao=pk)
+    resposta = Alternativa.objects.filter(pk=id_resposta)
+    return render(request, 'matematicaapp/atividades5ano.html', {'questao': questao, 'alternativas': alternativas, 'resposta':resposta})
 
 def estudante_detail(request, pk):
     estudante = get_object_or_404(Estudante, pk=pk)
@@ -41,3 +53,5 @@ def estudante_edit(request, pk):
     else:
         form = EstudanteForm(instance=estudante)
     return render(request, 'matematicaapp/estudante_edit.html', {'form': form})
+
+    
