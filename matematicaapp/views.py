@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Estudante, User, Professor, Questao, Alternativa
 from django.utils import timezone
 from .forms import EstudanteForm
+from .forms import QuestaoForm
+from .forms import AlternativaForm
 
 
 # Create your views here.
@@ -40,6 +42,19 @@ def estudante_novo(request):
         form = EstudanteForm()
     return render(request, 'matematicaapp/estudante_edit.html', {'form': form})
 
+def questao_nova(request):
+    if request.method == "POST":
+        form = QuestaoForm(request.POST)
+        if form.is_valid():
+            questao = form.save(commit=False)
+           # estudante.nome_completo = request.user
+           # questao.created_date = timezone.now()
+            questao.save()
+           # return redirect('atividades5ano', pk=questao.pk)
+    else:
+        form = QuestaoForm()
+    return render(request, 'matematicaapp/questao_nova.html', {'form': form})
+
 def estudante_edit(request, pk):
     estudante = get_object_or_404(Estudante, pk=pk)
     if request.method == "POST":
@@ -54,4 +69,3 @@ def estudante_edit(request, pk):
         form = EstudanteForm(instance=estudante)
     return render(request, 'matematicaapp/estudante_edit.html', {'form': form})
 
-    
