@@ -21,9 +21,11 @@ def atividadesgratis(request):
 
 def atividades5ano(request, pk, id_resposta):
     questao = get_object_or_404(Questao, pk=pk)
+    proximo_pk = pk+1
     alternativas = Alternativa.objects.filter(questao=pk)
     resposta = Alternativa.objects.filter(pk=id_resposta)
-    return render(request, 'matematicaapp/atividades5ano.html', {'questao': questao, 'alternativas': alternativas, 'resposta':resposta})
+    return render(request, 'matematicaapp/atividades5ano.html', {'questao': questao, 'alternativas': alternativas, 'resposta':resposta, 'proximo_pk':proximo_pk})
+    
 
 def estudante_detail(request, pk):
     estudante = get_object_or_404(Estudante, pk=pk)
