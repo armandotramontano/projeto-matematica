@@ -1,168 +1,52 @@
-{% load static %}
-<html>
-  <head>
-    <title>GeniAulas: formando gênios</title>
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap-theme.min.css"
-    />
-    <link rel="stylesheet" href="{% static 'CSS/base.css' %}" />
-    <link rel="stylesheet" href="{% static 'CSS/atividades5ano.css' %}" />
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Bootstrap core CSS -->
-    <!--   <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
-    <!-- Custom styles for this template -->
-    <!-- <link href="../../static/CSS/home.css" rel="stylesheet" /> -->
-  </head>
-
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/">GeniAulas</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/atividadesgratis">Atividades</a>
-            </li>
-          </ul>
-          <!--  <form class="form-inline mt-2 mt-md-0">
-            <input
-              class="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form> -->
-        </div>
-      </nav>
-    </header>
-
-    <div class="container mt-sm-5 my-1">
-      <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5">
-          <p>{{ questao.enunciado }}</p>
-          <img src="../../../{{questao.figura}}" width="300px" height="150px" />
-        </div>
-        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-          <form>
-            {% for alternativa in alternativas %}
-            <div class="form-check">
-              <input
-                class="form-check-input alternativas {% if questao.resposta == alternativa.pk %} corretaInput {% endif %}"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
-                value="{{alternativa.conteudo}}"
-              />
-              <label
-                class="form-check-label {% if questao.resposta == alternativa.pk %} corretaLabel {% endif %}"
-                for="exampleRadios2"
-              >
-                {{alternativa.conteudo}}
-              </label>
-            </div>
-            {% endfor %}
-          </form>
-        </div>
+{% extends 'matematicaapp/base.html' %} {% block content %}
+<main role="main">
+  <div class="containera mt-sm-5 my-1">
+    {{questao.pk}}
+    <div class="question ml-sm-5 pl-sm-5 pt-2">
+      <div class="py-2 h5">
+        <p>{{ questao.enunciado }}</p>
+        <img src="../../../{{questao.figura}}" width="300px" height="150px" />
+        <p>{{questao.fonte}}</p>
       </div>
-      <div class="d-flex align-items-center botoes pt-3">
-        <a
-          href="{% url 'atividades5ano' pk=8 id_resposta=1 %}"
-          class="btn btn-success"
-        >
-          Voltar
-        </a>
-        <button onclick="marcaACerta()" class="btn btn-primary">
-          Verificar resposta
-        </button>
-        <a
-          href="{% url 'atividades5ano' pk=proximo_pk id_resposta=proximo_pk %}"
-          class="btn btn-success"
-        >
-          Próxima atividade
-        </a>
+      <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+        <form>
+          {% for alternativa in alternativas %}
+          <div class="form-check">
+            <input
+              class="form-check-input alternativas {% if questao.resposta == alternativa.pk %} corretaInput {% endif %}"
+              type="radio"
+              name="exampleRadios"
+              id="exampleRadios2"
+              value="{{alternativa.conteudo}}"
+            />
+            <label
+              class="form-check-label {% if questao.resposta == alternativa.pk %} corretaLabel {% endif %}"
+              for="exampleRadios2"
+            >
+              {{alternativa.conteudo}}
+            </label>
+          </div>
+          {% endfor %}
+        </form>
       </div>
     </div>
-
-    <footer>
-      <p class="float-right"><a href="#">Back to top</a></p>
-      <p>
-        &copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot;
-        <a href="#">Terms</a>
-      </p>
-    </footer>
-  </body>
-
-  <!-- <div class="page-header">
-        {% if user.is_authenticated %}
-            <a href="{% url 'estudante_novo' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-        {% endif %}
-            <h1><a href="/">CArrosel</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                
-                </div>
-            </div>
-        </div> -->
-  <script>
-    function marcaACerta() {
-      const alternativas = document.getElementsByClassName("alternativas");
-      const resposta = document.getElementsByClassName("corretaInput")[0];
-      for (let input of alternativas) {
-        if (input.checked) {
-          if (input.value != resposta.value) {
-            input.nextElementSibling.style.backgroundColor = "red";
-          }
-        }
-      }
-      document.getElementsByClassName("corretaLabel")[0].style.backgroundColor =
-        "green";
-    }
-  </script>
-  <script
-    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"
-  ></script>
-  <!--  <script>
-    window.jQuery ||
-      document.write(
-        '<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>'
-      );
-  </script>
-  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script> -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"
-  ></script>
-</html>
+    <div class="d-flex align-items-center justify-content-between pt-3">
+      <a
+        href="{% url 'atividades5ano' pk=anterior_pk id_resposta=anterior_pk %}"
+        class="btn btn-primary"
+      >
+        Voltar
+      </a>
+      <button onclick="marcaACerta()" class="btn btn-success">
+        Verificar resposta
+      </button>
+      <a
+        href="{% url 'atividades5ano' pk=proximo_pk id_resposta=proximo_pk %}"
+        class="btn btn-primary"
+      >
+        Próxima atividade
+      </a>
+    </div>
+  </div>
+</main>
+{% endblock %}

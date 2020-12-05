@@ -9,11 +9,12 @@
   <div class="album py-5">
     <div class="container">
       <div class="row">
+        {% for chave, serie in series.items %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
             <img
               class="5ano"
-              src="../../static/assets/5ano.jpg"
+              src="../../../static/assets/{{serie.image}}"
               width="350px"
               height="180px"
             />
@@ -22,134 +23,14 @@
             >
               <a
                 class="btn btn-sg btn-primary"
-                href="{% url 'atividades5ano' pk=8 id_resposta=1 %}"
+                href="{% url 'atividades5ano' pk=1 id_resposta=1 %}"
                 role="button"
-                >Matemática - 5º ano</a
-              >
+                >{{serie.label}}
+              </a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="6ano"
-              src="../../static/assets/6ano.jpg"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 6º ano</text>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="7ano"
-              src="../../static/assets/7ano.png"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 7º ano</text>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="8ano"
-              src="../../static/assets/8ano.jpg"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 8º ano</text>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="9ano"
-              src="../../static/assets/9ano.jpg"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 9º ano</text>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="concursofundamental"
-              src="../../static/assets/concursofundamental.jpg"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - concurso fundamental</text>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="1ano"
-              src="../../static/assets/1ano.png"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 1º ano EM</text>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="2ano"
-              src="../../static/assets/2ano.jpg"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 2º ano EM</text>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img
-              class="3ano"
-              src="../../static/assets/3ano.jpg"
-              width="350px"
-              height="180px"
-            />
-            <div
-              class="card-body align-items-center d-flex justify-content-center"
-            >
-              <text> Matemática - 3º ano EM</text>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>

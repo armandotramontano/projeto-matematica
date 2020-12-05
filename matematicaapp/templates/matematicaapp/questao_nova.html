@@ -1,7 +1,19 @@
 {% extends 'matematicaapp/base.html' %} {% block content %}
-<h2>Nova questão</h2>
-<form method="POST" class="post-form">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="save btn btn-default">Adicionar</button>
-</form>
+<main role="main">
+  <div class="newquestion">
+    <div>
+      <h2>Nova questão</h2>
+      <form method="POST" class="post-form">
+        {% csrf_token %} {{ aform.as_p }} {{bform.as_p}}
+        <div class="qtdalt">
+          <div>
+            <label for="fname">Quantidade de alternativas:</label>
+            <input type="number" id="fname" name="fname" />
+          </div>
+          <button type="submit" class="save btn btn-primary">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
 {% endblock %}

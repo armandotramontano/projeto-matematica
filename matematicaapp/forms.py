@@ -9,11 +9,19 @@ class EstudanteForm(forms.ModelForm):
         model = Estudante
         fields = ('nome_completo', 'cpf_responsavel',)
 
-class QuestaoForm(forms.ModelForm):
+class QuestaoNovaForm(forms.ModelForm):
 
     class Meta:
         model = Questao
-        fields = ('enunciado', 'resposta',)
+        # fields = ('enunciado', 'resposta','fonte', 'dificuldade', 'area', 'anos_de_escolaridade', 'figura',)
+        fields = ('enunciado', 'resposta', 'figura',)
+
+class QuestaoNovaAlternativaForm(forms.ModelForm):
+
+    class Meta:
+        model = Alternativa
+        fields = ('conteudo',)
+
 
 class AlternativaForm(forms.ModelForm):
 
