@@ -8,7 +8,6 @@ class EstudanteForm(forms.ModelForm):
     class Meta:
         model = Estudante
         fields = ('nome_completo', 'cpf_responsavel',)
-
 class QuestaoNovaForm(forms.ModelForm):
 
     class Meta:

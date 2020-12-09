@@ -8,13 +8,13 @@ from .forms import QuestaoNovaAlternativaForm
 
 
 # Create your views here.
-
 def home(request):
     estudantes = Estudante.objects.order_by('nome_completo')
     professores = Professor.objects.order_by('nome_completo')
     tabela = Estudante.objects.all()
     tabela2 = User.objects.all()
     return render(request, 'matematicaapp/home.html', {'estudantes': estudantes, 'tabela': tabela, 'tabela2': tabela2, 'professores': professores})
+    
     
 def atividadesgratis(request):
     series = { "quinto": {"label": "Matemática - 5º ano", "image": "5ano.jpg"}, "sexto": {"label": "Matemática - 6º ano", "image": "6ano.jpg"}, "setimo": {"label": "Matemática - 7º ano", "image": "7ano.png"}, "oitavo": {"label": "Matemática - 8º ano", "image": "8ano.jpg"}, "nono": {"label": "Matemática - 9º ano", "image": "9ano.jpg"}, "concurso": {"label": "Matemática - Concurso Fundamental", "image": "concursofundamental.jpg"}, "primeiro": {"label": "Matemática - 1º ano EM", "image": "1ano.png"}, "segundo": {"label": "Matemática - 2º ano EM", "image": "2ano.jpg"}, "terceiro": {"label": "Matemática - 3º ano EM", "image": "3ano.jpg"}}
@@ -47,23 +47,6 @@ def estudante_novo(request):
         form = EstudanteForm()
     return render(request, 'matematicaapp/estudante_edit.html', {'form': form})
 
-def questao_nova(request):
-    if request.method == "POST":
-        aform = QuestaoNovaForm(request.POST)
-        bform = QuestaoNovaAlternativaForm(request.POST)
-        if aform.is_valid() and bform.is_valid():
-            questao = aform.save(commit=False)
-            alternativas = bform.save(commit=False)
-           # estudante.nome_completo = request.user
-           # questao.created_date = timezone.now()
-            questao.save()
-            alternativas.save()
-           # return redirect('atividades5ano', pk=questao.pk)
-    else:
-        aform = QuestaoNovaForm()
-        bform = QuestaoNovaAlternativaForm(request.POST)
-    return render(request, 'matematicaapp/questao_nova.html', {'aform': aform, 'bform': bform })
-
 def estudante_edit(request, pk):
     estudante = get_object_or_404(Estudante, pk=pk)
     if request.method == "POST":
@@ -77,4 +60,19 @@ def estudante_edit(request, pk):
     else:
         form = EstudanteForm(instance=estudante)
     return render(request, 'matematicaapp/estudante_edit.html', {'form': form})
+
+
+def questao_nova(request):
+    if request.method == "POST":
+        aform = QuestaoNovaForm(request.POST)
+        bform = QuestaoNovaAlternativaForm(request.POST)
+        if aform.is_valid() and bform.is_valid():
+            questao = aform.save(commit=False)
+            alternativas = bform.save(commit=False)
+            questao.save()
+            alternativas.save()
+    else:
+        aform = QuestaoNovaForm()
+        bform = QuestaoNovaAlternativaForm(request.POST)
+    return render(request, 'matematicaapp/questao_nova.html', {'aform': aform, 'bform': bform })
 

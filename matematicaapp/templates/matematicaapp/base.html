@@ -134,4 +134,16 @@
         "green";
     }
   </script>
+  <script>
+    document.getElementById("howmany").onchange = function () {
+      boxes = "";
+      var howmany = document.getElementById("howmany").value;
+      console.log(howmany);
+      for (i = 0; i < howmany; i++) {
+        boxes += "<b>{{ bform.as_p }}</b>";
+      }
+      $("#boxquantity").html(boxes);
+      // document.getElementById("boxquantity").innerHTML = boxes;
+    };
+  </script>
 </html>
