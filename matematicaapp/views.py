@@ -63,6 +63,10 @@ def estudante_edit(request, pk):
 
 
 def questao_nova(request):
+    if request.is_ajax():
+        print(request.POST)
+        request_data = request.POST
+        return HttpResponse("OK")
     if request.method == "POST":
         aform = QuestaoNovaForm(request.POST)
         bform = QuestaoNovaAlternativaForm(request.POST)
