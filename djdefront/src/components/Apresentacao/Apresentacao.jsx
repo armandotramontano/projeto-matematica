@@ -15,7 +15,7 @@ const styles = (theme) => ({
     backgroundPosition: "center",
   },
   button: {
-    minWidth: 200,
+    minWidth: 300,
   },
   h5: {
     marginBottom: theme.spacing(4),
